@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Mongoid denormalization helper module}
   spec.description   = %q{Helper module for denormalizing association attributes in Mongoid models.}
-  spec.homepage      = "http://github.com/chaudhary/mongoid_denormalization"
+  spec.homepage      = "http://github.com/chaudhary/mongoid-denormalization"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
