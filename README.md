@@ -33,8 +33,11 @@ denormalize_from(:user, :email) # this will add a user_email field on your model
 
 Optionally, you can also write it as
 ```ruby
-denormalize_from(:user, :name, :denormalized_field_name => :username) # this will add a username field on your model
-denormalize_from(:user, :email, :denormalized_field_name => :useremail) # this will add a useremail field on your model
+# this will add a username field on your model
+denormalize_from(:user, :name, :denormalized_field_name => :username)
+
+# this will add a useremail field on your model
+denormalize_from(:user, :email, :denormalized_field_name => :useremail)
 ```
 
 Lets say we have a company model with embedded jobs in it. We want to denormalize user_name and user_email in jobs.
@@ -49,6 +52,7 @@ denormalize_from(:user, :name, to_klass_infos: [{
   updator: "jobs.$.user_name",
   index_key: "jobs.user_id"
 }])
+
 denormalize_from(:user, :email, to_klass_infos: [{
   klasses: [::Company],
   selector_proc: Proc.new do |id, value|
@@ -75,7 +79,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mongoid-denormalization. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/chaudhary/mongoid-denormalization. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
