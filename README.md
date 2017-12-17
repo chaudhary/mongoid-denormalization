@@ -22,21 +22,25 @@ Or install it yourself as:
 ## Usage
 
 In your model:
-$ # Include the helper method
-$ include Mongoid::Denormalization
-$
-$ # Define your denormalization
-$ denormalize_from(:user, :name) # this will add a user_name field on your model
-$ denormalize_from(:user, :email) # this will add a user_email field on your model
+```ruby
+# Include the helper method
+include Mongoid::Denormalization
 
+# Define your denormalization
+denormalize_from(:user, :name) # this will add a user_name field on your model
+denormalize_from(:user, :email) # this will add a user_email field on your model
+```
 
 Optionally, you can also write it as
-$ denormalize_from(:user, :name, :denormalized_field_name => :nusername) # this will add a username field on your model
-$ denormalize_from(:user, :email, :denormalized_field_name => :useremail) # this will add a useremail field on your model
+```ruby
+denormalize_from(:user, :name, :denormalized_field_name => :nusername) # this will add a username field on your model
+denormalize_from(:user, :email, :denormalized_field_name => :useremail) # this will add a useremail field on your model
+```
 
 Lets say we have a company model with embedded jobs in it. We want to denormalize user_name and user_email in jobs.
 We can write the following code in our jobs model:
 
+```ruby
 denormalize_from(:user, :name, to_klass_infos: [{
   klasses: [::Company],
   selector_proc: Proc.new do |id, value|
@@ -53,10 +57,13 @@ denormalize_from(:user, :email, to_klass_infos: [{
   updator: "jobs.$.user_email",
   index_key: "jobs.user_id"
 }])
+```
 
 You can call force_denormalize also,
+```ruby
 company.force_denormalize # this will simply sync all the denormalized fields and will not triiger a save on document.
 company.force_denormalize! # this will sync all the denormalized fields and will also triiger a save on document.
+```
 
 Note: you should also create proper db indexes required, otherwise the module may through an error.
 
