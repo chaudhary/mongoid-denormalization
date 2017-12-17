@@ -33,7 +33,7 @@ denormalize_from(:user, :email) # this will add a user_email field on your model
 
 Optionally, you can also write it as
 ```ruby
-denormalize_from(:user, :name, :denormalized_field_name => :nusername) # this will add a username field on your model
+denormalize_from(:user, :name, :denormalized_field_name => :username) # this will add a username field on your model
 denormalize_from(:user, :email, :denormalized_field_name => :useremail) # this will add a useremail field on your model
 ```
 
