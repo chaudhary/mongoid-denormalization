@@ -1,0 +1,6 @@
+test:
+  clients:
+    default:
+      database: mongoid_denormalization_test
+      hosts:
+        - localhost:27017

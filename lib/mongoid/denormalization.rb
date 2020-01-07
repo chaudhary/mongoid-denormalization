@@ -66,7 +66,7 @@ module Mongoid
         # end
 
         to_klass_roots = to_klass_infos.map{|to_klass_info| to_klass_info[:klasses].map(&:to_s)}.flatten.uniq
-        from_klass = self.relations[relation.to_s][:class_name].constantize
+        from_klass = self.relations[relation.to_s].class_name.constantize
 
         field_type = from_klass.fields[field_name.to_s].options[:type] if field_terms.size == 1 && field_name.to_s != "_type"
         field_type ||= String
@@ -117,14 +117,14 @@ module Mongoid
             changed_fn = "#{field_terms[0]}_changed?"
             changed_fn = "asset_filename_changed?" if field_terms[0].to_s == "asset"
             if from_doc.send(changed_fn)
-              field_value = ::AcDenormalize::Helpers.field_value(from_doc, field_terms)
-              ::AcDenormalize::Helpers.update_from_klass_changes(to_klass_infos, from_doc.id, field_value)
+              field_value = ::Mongoid::Denormalization::Helpers.field_value(from_doc, field_terms)
+              ::Mongoid::Denormalization::Helpers.update_from_klass_changes(to_klass_infos, from_doc.id, field_value)
             end
           end
 
           after_destroy do |from_doc|
             field_value = nil
-            ::AcDenormalize::Helpers.update_from_klass_changes(to_klass_infos, from_doc.id, field_value)
+            ::Mongoid::Denormalization::Helpers.update_from_klass_changes(to_klass_infos, from_doc.id, field_value)
           end
         end
 
@@ -141,7 +141,7 @@ module Mongoid
               from_doc = self.send(relation)
               return nil if from_doc.blank?
 
-              field_value = ::AcDenormalize::Helpers.field_value(from_doc, field_terms)
+              field_value = ::Mongoid::Denormalization::Helpers.field_value(from_doc, field_terms)
 
               if use_denormalized
                 self.send("#{denormalized_field_name}=", field_value)
@@ -158,7 +158,7 @@ module Mongoid
             from_doc = self.send(relation)
             return nil if from_doc.blank?
 
-            field_value = ::AcDenormalize::Helpers.field_value(from_doc, field_terms)
+            field_value = ::Mongoid::Denormalization::Helpers.field_value(from_doc, field_terms)
             self.send("#{denormalized_field_name}=", field_value)
             return true
           end
@@ -169,7 +169,7 @@ module Mongoid
             from_doc = self.send(relation)
             return nil if from_doc.blank?
 
-            field_value = ::AcDenormalize::Helpers.field_value(from_doc, field_terms)
+            field_value = ::Mongoid::Denormalization::Helpers.field_value(from_doc, field_terms)
             self.set(denormalized_field_name.to_sym => field_value)
           end
 
