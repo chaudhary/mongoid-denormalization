@@ -1,7 +1,6 @@
 # Mongoid::Denormalization
 
 Helper module for denormalizing association attributes in Mongoid models & embedded models.
-Supports rails 5.1.4, mongoid 6.2, ruby 2.4.2
 
 ## Installation
 
