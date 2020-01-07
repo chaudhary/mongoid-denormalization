@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid-denormalization (1.0.0)
+    mongoid-denormalization (1.0.1)
 
 GEM
   remote: https://rubygems.org/
