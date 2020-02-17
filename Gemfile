@@ -6,6 +6,7 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gemspec
 
 group :test do
+  gem 'mongoid'
   gem 'pry'
   gem 'rspec'
   gem 'database_cleaner'
