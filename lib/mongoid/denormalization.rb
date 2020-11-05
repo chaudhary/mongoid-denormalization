@@ -17,6 +17,7 @@ module Mongoid
 
     module Helpers
       def self.update_from_klass_changes(to_klass_infos, from_doc_id, field_value)
+        puts "hello"
         to_klass_infos.each do |to_klass_info|
           selector = to_klass_info[:selector_proc].call(from_doc_id, field_value)
           to_klass_info[:klasses].each do |klass|
