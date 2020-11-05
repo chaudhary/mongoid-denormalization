@@ -5,6 +5,7 @@ module Mongoid
     extend ActiveSupport::Concern
 
 
+
     included do
       def force_denormalize!
         force_denormalize
